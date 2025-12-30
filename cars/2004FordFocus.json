@@ -1,0 +1,8 @@
+{
+    "make": "Ford",
+    "model": "Focus",
+    "year": 2004,
+    "favorite": true,
+    "rating": 5,
+    "notes": "my car"
+}
