@@ -69,7 +69,7 @@ def new_car_input():
     car_year = int(input_then_cap("What is the year of the car? "))
     is_car_fav = False
     car_rating = int(input_then_cap("Give your rating of the car 1-5 "))
-    car_note = "my car"
+    car_note = "No note yet..."
     car_name = str(car_year)+car_make+car_model
     car_dict = dict(name = car_name, make = car_make, model = car_model, year = car_year, favorite = is_car_fav, rating = car_rating, notes = car_note)
     return car_dict
@@ -80,8 +80,8 @@ def new_car():
     add_to_saved_cars(car['name'])
     save_car_to_json(car, car['name'])
 
-#Function to inspect the data about a car
-def inspect_car(car):
+#Check if a car is saved and return its proper name
+def check_if_car(car):
     inspect_car_lower = car.lower()
     cars = get_saved_cars()
     car_to_inspect = ""
@@ -89,12 +89,19 @@ def inspect_car(car):
         car_lower = car.lower()
         if inspect_car_lower == car_lower:
             car_to_inspect = car
+    return car_to_inspect
+
+#Function to inspect the data about a car
+def inspect_car(car):
+    print("\n")
+    car_to_inspect = check_if_car(car)
     if car_to_inspect:
         file_path = turn_to_direct("cars",car_to_inspect)
         with open(file_path, 'r') as file:
             car_dict = json.load(file)
         for i in car_dict:
             print(i,": ",car_dict[i])
+
 #MAIN LOOP
 while True:
     print(
@@ -103,7 +110,8 @@ while True:
         "Enter N to add a car\n"
         "Enter V to view all cars added\n"
         "Enter I to look at a car\n"
-        "Enter E to edit a car's file"
+        "Enter E to edit a car's file\n"
+        "Enter S to search the saved cars\n"
     )
     plan = input_then_cap("What would you like to do?")
     print ("\n")
@@ -114,3 +122,5 @@ while True:
             print (i)
     elif plan == "I":
         inspect_car(input("What is the name of the car you want to look at "))
+    elif plan == "E":
+        pass
