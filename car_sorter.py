@@ -80,6 +80,21 @@ def new_car():
     add_to_saved_cars(car['name'])
     save_car_to_json(car, car['name'])
 
+#Function to inspect the data about a car
+def inspect_car(car):
+    inspect_car_lower = car.lower()
+    cars = get_saved_cars()
+    car_to_inspect = ""
+    for car in cars:
+        car_lower = car.lower()
+        if inspect_car_lower == car_lower:
+            car_to_inspect = car
+    if car_to_inspect:
+        file_path = turn_to_direct("cars",car_to_inspect)
+        with open(file_path, 'r') as file:
+            car_dict = json.load(file)
+        for i in car_dict:
+            print(i,": ",car_dict[i])
 #MAIN LOOP
 while True:
     print(
@@ -88,6 +103,7 @@ while True:
         "Enter N to add a car\n"
         "Enter V to view all cars added\n"
         "Enter I to look at a car\n"
+        "Enter E to edit a car's file"
     )
     plan = input_then_cap("What would you like to do?")
     print ("\n")
@@ -97,16 +113,4 @@ while True:
         for i in get_saved_cars():
             print (i)
     elif plan == "I":
-        inspect_car = input("What is the name of the car you want to look at ")
-        inspect_car_lower = inspect_car.lower()
-        cars = get_saved_cars()
-        car_to_inspect = ""
-        for car in cars:
-            car_lower = car.lower()
-            if inspect_car_lower == car_lower:
-                car_to_inspect = car
-        if car_to_inspect:
-            file_path = turn_to_direct("cars",car_to_inspect)
-            with open(file_path, 'r') as file:
-                car_dict = json.load(file)
-            print(car_dict)
+        inspect_car(input("What is the name of the car you want to look at "))
