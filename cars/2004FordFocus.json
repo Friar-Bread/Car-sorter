@@ -3,7 +3,7 @@
     "make": "Ford",
     "model": "Focus",
     "year": 2004,
-    "favorite": true,
+    "favorite": false,
     "rating": 5,
     "notes": "my car"
 }

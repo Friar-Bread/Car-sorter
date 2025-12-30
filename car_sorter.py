@@ -15,6 +15,14 @@ def save__to_json(dictionary_in, file_path):
         json.dump(dictionary_in, json_file, indent=4)
     return file_path
 
+#Function to open a directory
+def turn_to_direct(directory_name,file_name):
+    folder = Path(directory_name)
+    folder.mkdir(parents=True, exist_ok=True)
+    file_name = (str(file_name)+".json")
+    file_path = folder/file_name
+    return file_path
+
 #Opening the file that shows all saved cars - makes it into a list
 def open_saved_cars():
     file_path = "SavedCars.txt"
@@ -29,6 +37,12 @@ def pack_up_saved_cars(saved_cars):
         for item in saved_cars:
             file.write(str(item) + '\n')
 
+#Getting the saved cars list
+def get_saved_cars():
+    saved_cars = open_saved_cars()
+    pack_up_saved_cars(saved_cars)
+    return saved_cars
+
 #Adding a car to the saved cars list and file
 def add_to_saved_cars(car_to_add):
     saved_cars = open_saved_cars() #Opening list
@@ -38,10 +52,7 @@ def add_to_saved_cars(car_to_add):
 
 #Saving a car JSON file into the cars folder - using the save to JSON function
 def save_car_to_json(dictionary_in, file_name):
-    folder = Path("cars")
-    file_name = (str(file_name)+".json")
-    file_path = folder/file_name
-    folder.mkdir(parents=True, exist_ok=True)
+    file_path = turn_to_direct("cars",file_name)
     file_path = save__to_json(dictionary_in, file_path)
     return file_path 
 
@@ -56,7 +67,7 @@ def new_car_input():
     car_make = input_then_cap("What is the make of the car? ")
     car_model = input_then_cap("What is the model of the car? ")
     car_year = int(input_then_cap("What is the year of the car? "))
-    is_car_fav = True
+    is_car_fav = False
     car_rating = int(input_then_cap("Give your rating of the car 1-5 "))
     car_note = "my car"
     car_name = str(car_year)+car_make+car_model
@@ -69,5 +80,33 @@ def new_car():
     add_to_saved_cars(car['name'])
     save_car_to_json(car, car['name'])
 
-#MAIN
-new_car()
+#MAIN LOOP
+while True:
+    print(
+        "\n"
+        "Hello\n"
+        "Enter N to add a car\n"
+        "Enter V to view all cars added\n"
+        "Enter I to look at a car\n"
+    )
+    plan = input_then_cap("What would you like to do?")
+    print ("\n")
+    if plan == "N":
+        new_car()
+    elif plan == "V":
+        for i in get_saved_cars():
+            print (i)
+    elif plan == "I":
+        inspect_car = input("What is the name of the car you want to look at ")
+        inspect_car_lower = inspect_car.lower()
+        cars = get_saved_cars()
+        car_to_inspect = ""
+        for car in cars:
+            car_lower = car.lower()
+            if inspect_car_lower == car_lower:
+                car_to_inspect = car
+        if car_to_inspect:
+            file_path = turn_to_direct("cars",car_to_inspect)
+            with open(file_path, 'r') as file:
+                car_dict = json.load(file)
+            print(car_dict)
