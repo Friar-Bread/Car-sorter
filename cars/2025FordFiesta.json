@@ -1,0 +1,9 @@
+{
+    "name": "2025FordFiesta",
+    "make": "Ford",
+    "model": "Fiesta",
+    "year": 2025,
+    "favorite": true,
+    "rating": 1,
+    "notes": "my car"
+}
