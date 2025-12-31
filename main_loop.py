@@ -1,4 +1,5 @@
-from car_sorter import input_then_cap, new_car, get_saved_cars, user_inspect_car, print_list, edit_car
+from car_sorter import new_car, get_saved_cars, user_inspect_car, edit_car
+from basic_data_handling import print_list, input_then_cap
 
 #MAIN LOOP
 while True:

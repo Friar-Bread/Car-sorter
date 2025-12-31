@@ -1,18 +1,6 @@
 import json #For saving JSON data on each car
 from pathlib import Path #For saving to folders
-from datetime import date #For getting current date
-
-#function to print a list over multiple lines
-def print_list(list_to_print):
-    for i in list_to_print:
-        print(i)
-
-#Comparing current year with model year to get age
-def years_since (year_in):
-    now = date.today()
-    now_year = now.year
-    age = int(now_year)-int(year_in)
-    return age
+from basic_data_handling import print_list, input_then_cap, input_then_bool, input_then_int
 
 #Function to save dictionary to JSON
 def save__to_json(dictionary_in, file_path):
@@ -61,12 +49,6 @@ def save_car_to_json(dictionary_in, file_name):
     file_path = save__to_json(dictionary_in, file_path)
     return file_path 
 
-#Getting and formatting a text input
-def input_then_cap(question):
-    answer = input(str(question))
-    answer = answer.capitalize()
-    return (answer)
-
 #Check if a car is saved and return its proper name
 def check_if_car(car):
     inspect_car_lower = car.lower()
@@ -95,9 +77,9 @@ data_questions = dict(make = "What is the make of the car? ",
 def new_car_input():
     car_make = input_then_cap(data_questions["make"])
     car_model = input_then_cap(data_questions["model"])
-    car_year = int(input_then_cap(data_questions["year"]))
+    car_year = input_then_int(data_questions["year"])
     is_car_fav = False
-    car_rating = int(input_then_cap(data_questions["rating"]))
+    car_rating = input_then_int(data_questions["rating"])
     car_note = "No note yet..."
     car_name = str(car_year)+car_make+car_model
     car_dict = dict(name = car_name, make = car_make, model = car_model, year = car_year, favorite = is_car_fav, rating = car_rating, note = car_note)
@@ -151,7 +133,7 @@ def user_edit_car_data_point(car_name, data):
     if data in data_needing_str:
         new_data = input_then_cap(question)
     elif data in data_needing_int:
-        new_data = int(input_then_cap(question))
+        new_data = input_then_int(question)
     elif data in data_needing_bool:
         new_data = True
     if new_data:
@@ -171,7 +153,7 @@ def edit_car():
         "3 - Year\n"
         "4 - Rating"
     )
-    data_input = input("What piece of data do you want to edit? ")
+    data_input = input_then_int("What piece of data do you want to edit? ")
     things_possible_to_edit = ['make','model','year','rating']
-    chosen_data = things_possible_to_edit[int(data_input)-1]
+    chosen_data = things_possible_to_edit[data_input-1]
     user_edit_car_data_point(car_name, chosen_data)
