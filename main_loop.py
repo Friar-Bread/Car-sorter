@@ -1,4 +1,4 @@
-from car_sorter import new_car, get_saved_cars, user_inspect_car, edit_car
+from car_sorter import new_car, get_saved_cars, user_inspect_car, edit_car, search_cars, delete_car, bulk_operations
 from basic_data_handling import print_list, input_then_cap
 
 #MAIN LOOP
@@ -11,6 +11,8 @@ while True:
         "Enter I to look at a car\n"
         "Enter E to edit a car's file\n"
         "Enter S to search the saved cars\n"
+        "Enter D to delete a saved car\n"
+        "Enter B for bulk operations"
     )
     plan = input_then_cap("What would you like to do? ")
     print ("\n")
@@ -24,4 +26,8 @@ while True:
     elif plan == "E":
         edit_car()
     elif plan == "S":
-        pass
+        search_cars()
+    elif plan == "D":
+        delete_car()
+    elif plan == "B":
+        bulk_operations

@@ -2,3 +2,5 @@
 2025FordFiesta
 1999RenaultTwingo
 1995ToyotaBrat
+1999FordFocus
+1950Fiat500

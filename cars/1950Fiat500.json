@@ -1,0 +1,9 @@
+{
+    "name": "1950Fiat500",
+    "make": "Fiat",
+    "model": "500",
+    "year": 1950,
+    "favorite": false,
+    "rating": 3,
+    "note": "No note yet..."
+}
