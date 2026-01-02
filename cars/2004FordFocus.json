@@ -1,9 +1,0 @@
-{
-    "name": "2004FordFocus",
-    "make": "Ford",
-    "model": "Focus",
-    "year": 2004,
-    "favorite": false,
-    "rating": 5,
-    "notes": "my car"
-}

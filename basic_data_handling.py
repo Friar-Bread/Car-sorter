@@ -26,7 +26,7 @@ def input_then_bool(question):
     follower = " Y or yes for True, anything else False "
     answer = input(str(question)+follower)
     if answer:
-        answer = answer.lower
+        answer = str(answer.lower)
         answer = answer[0]
         if answer == "y":
             return True

@@ -11,8 +11,8 @@ while True:
         "Enter I to look at a car\n"
         "Enter E to edit a car's file\n"
         "Enter S to search the saved cars\n"
-        "Enter D to delete a saved car\n"
-        "Enter B for bulk operations"
+        "Enter D to delete a saved car - Not working yet\n"
+        "Enter B for bulk operations - Not working yet"
     )
     plan = input_then_cap("What would you like to do? ")
     print ("\n")
